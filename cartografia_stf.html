@@ -375,7 +375,7 @@ select { font-family: var(--ff-mono); font-size: 10px; padding: 4px 8px; border-
 </main>
 
 <footer class="site-footer">
-  <strong>ICONS · Instituto Constituição Aberta</strong> · Projeto Justiça Aberta · Coord. Dra. Damares Medina Coelho<br>
+  <strong>ICONS · Instituto Constituição Aberta</strong> · Projeto Justiça Aberta · Coord. Damares Medina<br>
   Dados extraídos da Constituição Federal Comentada pelas decisões do STF · 9.014 precedentes · 1988–2026
 </footer>
 
@@ -529,7 +529,7 @@ const RENDERS = {
     <div class="card">
       <div class="card-title">Evolução das principais classes por período</div>
       <div style="position:relative;height:160px"><canvas id="ch_cevol"></canvas></div>
-      <div class="info-note">ADI + RE = 58,7% do contencioso. ADPF cresce após 2016 como instrumento de controle concentrado. AI foi extinto em 2010 após representar ~4% do volume. Súmulas Vinculantes (93) marcam consolidação doutrinária.</div>
+      <div class="info-note">ADI + RE = 58,7% do contencioso constitucional. ADPF cresce após 2016 como instrumento de controle concentrado. AI foi extinto em 2010 após representar ~4% do volume. Súmulas Vinculantes (93) marcam consolidação doutrinária.</div>
     </div>`;
     mkChart('ch_cls', {type:'doughnut', data:{labels:DATA.classes.map(c=>c[0]), datasets:[{data:DATA.classes.map(c=>c[1]), backgroundColor:COLORS, borderWidth:2, borderColor:'#f5f0e8'}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{font:{size:10}, color:'#6b6355', boxWidth:12}}, tooltip:{callbacks:{label:c=>c.label+': '+c.parsed.toLocaleString('pt-BR')+' ('+((c.parsed/9014)*100).toFixed(1)+'%)'}}}}});
     mkChart('ch_cevol', {type:'bar', data:{labels:['88–94','95–01','02–08','09–15','16–26'], datasets:[{label:'ADI',data:[180,420,900,680,697],backgroundColor:'#1a2744'},{label:'RE',data:[100,380,750,600,589],backgroundColor:'#3d679c'},{label:'HC',data:[60,100,200,220,203],backgroundColor:'#0d5c5c'},{label:'ADPF',data:[0,5,40,80,203],backgroundColor:'#b8860b'}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{font:{size:9}, color:tc, boxWidth:10}}}, scales:{x:{stacked:true, ticks:{font:{size:9}, color:tc}}, y:{stacked:true, grid:{color:gc}, ticks:{font:{size:9}, color:tc}}}}});
