@@ -485,7 +485,7 @@ function rDetail(art){
       }
     }
 
-    const docHTML=w.text?`<div class="pc-body">
+    const docHTML=w.doctrine?`<div class="pc-body">
       <div class="pc-body-yr">${w.doctrine_year?w.doctrine_year+' · ':''}${esc(w.doctrine_relator||'—')}</div>
       <div class="pc-doctrine">${esc(w.doctrine||'')}${w.doctrine&&w.doctrine.length>=200?'…':''}</div>
       ${changePanel}
