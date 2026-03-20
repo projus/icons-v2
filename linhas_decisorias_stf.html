@@ -428,8 +428,8 @@ body{font-family:var(--ff-b);background:var(--paper3);color:var(--ink);height:10
 </div>
 
 <script>
-let A=[];
-fetch('data.json').then(r=>r.json()).then(d=>{A=d.articles||d;HM=d.heatmap||null;rSide();buildSpine();const first=A.find(a=>a.id==='Art. 1º')||gf()[0];if(first)open_(first.id);}).catch(e=>console.error('Failed to load data:',e));
+let A=[],SP=[];
+fetch('data.json').then(r=>r.json()).then(d=>{A=d.articles||d;HM=d.heatmap||null;SP=d.spine||[];rSide();buildSpine();const first=A.find(a=>a.id==='Art. 1º')||gf()[0];if(first)open_(first.id);}).catch(e=>console.error('Failed to load data:',e));
 
 const RC={};const PAL=['#1a2744','#c0392b','#0d5c5c','#7a5a07','#4a3080','#2d6a2d','#5c3a1a','#1a5c3a','#3a1a5c','#c0700b','#5c4a1a','#243058','#6b2d1a','#1a4a3a','#4a1a3a'];
 let pi=0;
@@ -794,6 +794,7 @@ function spVal(total){return spMode==='log'?Math.log(total+1):total;}
 
 function spBarCol(a){
   if(spCol==='block'){
+    if(a.blockColor) return a.blockColor;
     const n=parseInt(a.id.match(/\d+/)?.[0]||0);
     return spGetBlock(n).light;
   }
@@ -807,15 +808,11 @@ function spBarCol(a){
 }
 
 function buildSpine(){
-  if(!A.length) return;
-  const sorted=[...A].sort((a,b)=>{
-    const na=parseInt(a.id.match(/\d+/)?.[0]||0);
-    const nb=parseInt(b.id.match(/\d+/)?.[0]||0);
-    return na-nb;
-  });
+  const sorted=SP.length?SP:[...A].sort((a,b)=>parseInt(a.id.match(/\d+/)?.[0]||0)-parseInt(b.id.match(/\d+/)?.[0]||0));
+  if(!sorted.length) return;
   const vals=sorted.map(a=>spVal(a.total));
   const cols=sorted.map(a=>spBarCol(a));
-  const seismic=sorted.map((a,i)=>(a.reversals&&a.reversals.length>0)?{x:i,y:spVal(a.total)+.05}:null).filter(Boolean);
+  const seismic=sorted.map((a,i)=>{const r=typeof a.reversals==='number'?a.reversals:(a.reversals?.length||0);return r>0?{x:i,y:spVal(a.total)+.05}:null;}).filter(Boolean);
 
   if(spChart){spChart.destroy();spChart=null;}
   spChart=new Chart(document.getElementById('spineCanvas'),{
@@ -846,7 +843,7 @@ function buildSpine(){
         document.getElementById('stt-cf').textContent=(a.cf_text||a.full||'').substring(0,60)+'…';
         document.getElementById('stt-dec').textContent=a.total.toLocaleString('pt-BR');
         document.getElementById('stt-idi').textContent=a.score;
-        const nrev=a.reversals?a.reversals.length:0;
+        const nrev=typeof a.reversals==='number'?a.reversals:(a.reversals?.length||0);
         document.getElementById('stt-rev').textContent=nrev>0?'⚠ '+nrev:'—';
         const wrap=evt.chart.canvas.parentElement;
         const wRect=wrap.getBoundingClientRect();
