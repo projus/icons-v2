@@ -441,13 +441,13 @@ body {
       Mapeamento jurisprudencial das decisões do Supremo Tribunal Federal desde a promulgação da Constituição Federal de 1988. Padrões de decidibilidade, oscilação jurisprudencial e linhas decisórias por artigo — com dados reais extraídos dos acórdãos.
     </p>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-n">9.014</div><div class="stat-l">decisões mapeadas</div></div>
+      <div class="stat"><div class="stat-n" id="stat-decisoes">—</div><div class="stat-l">decisões mapeadas</div></div>
       <div class="stat-sep"></div>
-      <div class="stat"><div class="stat-n">354</div><div class="stat-l">artigos da CF/88</div></div>
+      <div class="stat"><div class="stat-n" id="stat-artigos">—</div><div class="stat-l">artigos da CF/88</div></div>
       <div class="stat-sep"></div>
-      <div class="stat"><div class="stat-n">37 anos</div><div class="stat-l">amplitude temporal</div></div>
+      <div class="stat"><div class="stat-n" id="stat-anos">—</div><div class="stat-l">amplitude temporal</div></div>
       <div class="stat-sep"></div>
-      <div class="stat"><div class="stat-n">80+</div><div class="stat-l">relatores mapeados</div></div>
+      <div class="stat"><div class="stat-n" id="stat-relatores">—</div><div class="stat-l">relatores mapeados</div></div>
     </div>
     <div class="hero-ctas">
       <a href="cartografia_stf.html" class="cta-primary">Cartografia do contencioso constitucional →</a>
@@ -474,7 +474,7 @@ body {
           <div class="tool-tagline">12 eixos analíticos · visão macro</div>
         </div>
         <div class="tool-card-body">
-          <p class="tool-desc">Visão panorâmica do contencioso constitucional. Distribui as 9.014 decisões por eixos temáticos, temporais, institucionais e processuais para revelar a estrutura do sistema.</p>
+          <p class="tool-desc" id="tool-carto-desc">Visão panorâmica do contencioso constitucional. Distribui as decisões por eixos temáticos, temporais, institucionais e processuais para revelar a estrutura do sistema.</p>
           <div class="tool-features">
             <div class="tool-feat">Evolução temporal 1988–2026</div>
             <div class="tool-feat">Distribuição por classe processual</div>
@@ -615,12 +615,54 @@ body {
     <div class="footer-logo">ICONS · Instituto Constituição Aberta</div>
     <div class="footer-copy">
       PROJUS · Projeto Justiça Aberta · Coord. Damares Medina<br>
-      9.014 decisões do STF · 354 artigos da CF/88 · 1988–2026<br>
+      <span id="footer-stats">— decisões do STF · — artigos da CF/88 · 1988–2026</span><br>
       <a href="cartografia_stf.html">Cartografia do Contencioso Constitucional</a> &nbsp;·&nbsp;
       <a href="linhas_decisorias_stf.html">Oscilação Jurisprudencial</a>
     </div>
   </div>
 </footer>
+
+<script src="icons-supabase.js"></script>
+<script>
+(function () {
+  async function boot() {
+    try {
+      var bundle = await ICONS_SB.fetchBundle();
+      var st = ICONS_SB.fetchIndexStats(bundle);
+      var el = function (id) {
+        return document.getElementById(id);
+      };
+      if (el('stat-decisoes')) el('stat-decisoes').textContent = st.decisoes.toLocaleString('pt-BR');
+      if (el('stat-artigos')) el('stat-artigos').textContent = String(st.artigosComVinculo);
+      if (el('stat-anos')) el('stat-anos').textContent = st.anosAmplitude + ' anos';
+      if (el('stat-relatores')) el('stat-relatores').textContent = String(st.relatores);
+      var og = document.querySelector('meta[property="og:description"]');
+      if (og)
+        og.setAttribute(
+          'content',
+          st.decisoes.toLocaleString('pt-BR') +
+            ' decisões do STF mapeadas. Padrões de decidibilidade, oscilação jurisprudencial e linhas decisórias por artigo.'
+        );
+      var fd = document.getElementById('footer-stats');
+      if (fd)
+        fd.innerHTML =
+          st.decisoes.toLocaleString('pt-BR') +
+          ' decisões do STF · ' +
+          st.artigosComVinculo +
+          ' artigos da CF/88 · 1988–2026';
+      var td = document.getElementById('tool-carto-desc');
+      if (td)
+        td.textContent =
+          'Visão panorâmica do contencioso constitucional. Distribui as ' +
+          st.decisoes.toLocaleString('pt-BR') +
+          ' decisões por eixos temáticos, temporais, institucionais e processuais para revelar a estrutura do sistema.';
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  boot();
+})();
+</script>
 
 </body>
 </html>
