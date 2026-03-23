@@ -536,28 +536,25 @@ function fmt(n) {
 
 async function loadStats() {
   try {
-    // Total de vínculos (citações)
-    const vinculos = await get('cf_vinculos', 'select=id&limit=1')
+    // Total de vínculos (citações) — count=exact, sem trazer dados
+    const vinculos = await get('cf_vinculos', 'select=id&limit=0')
     document.getElementById('stat-decisoes').textContent = fmt(vinculos.count || 0)
 
-    // Total de artigos com vínculos
-    const { data: artsData } = await get('cf_vinculos', 'select=artigo_id&limit=1000')
-    const artsUnicos = new Set(artsData.map(v => v.artigo_id)).size
-    document.getElementById('stat-artigos').textContent = artsUnicos + (artsUnicos > 350 ? '+' : '')
+    // Total de artigos — count=exact, sem trazer dados
+    const artigos = await get('cf_artigos', 'select=id&limit=0')
+    document.getElementById('stat-artigos').textContent = fmt(artigos.count || 0)
 
-    // Total de relatores únicos
-    const { data: relData } = await get('stf_decisoes', 'select=relator&relator=not.is.null&limit=1000')
-    const relUnicos = new Set(relData.map(d => d.relator).filter(Boolean)).size
-    document.getElementById('stat-relatores').textContent = relUnicos + '+'
+    // Total de relatores — hardcode
+    document.getElementById('stat-relatores').textContent = '80+'
 
     // Footer
     document.getElementById('footer-stats').textContent =
-      `${fmt(vinculos.count)} citações · ${artsUnicos} artigos da CF/88 · 1988–2026`
+      `${fmt(vinculos.count)} citações · ${fmt(artigos.count)} artigos da CF/88 · 1988–2026`
 
   } catch(e) {
     console.error('Erro ao carregar stats:', e)
     document.getElementById('stat-decisoes').textContent = '9.297'
-    document.getElementById('stat-artigos').textContent = '354'
+    document.getElementById('stat-artigos').textContent = '377'
     document.getElementById('stat-relatores').textContent = '80+'
   }
 }
