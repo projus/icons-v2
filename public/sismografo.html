@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sismógrafo Jurisprudencial · ICONS · CF/88 1988–2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f0e0d; --paper: #f5f0e8; --paper2: #ede7d9; --paper3: #e2d9c8;
+  --gold: #b8860b; --gold2: #d4a017; --navy: #1a2744; --navy2: #243058;
+  --muted: #6b6355; --border: rgba(15,14,13,0.12); --border2: rgba(15,14,13,0.22);
+  --ff-display: 'Playfair Display', serif;
+  --ff-mono: 'DM Mono', monospace;
+  --ff-body: 'DM Sans', sans-serif;
+  --sidebar-w: 260px;
+  --panel-w: 380px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+body { font-family: var(--ff-body); background: var(--paper); color: var(--ink); font-size: 13px; line-height: 1.5; height: 100%; display: flex; flex-direction: column; }
+
+/* HEADER */
+.site-header { background: var(--navy); color: var(--paper); padding: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,.3); flex-shrink: 0; }
+.header-inner { max-width: 100%; padding: 0 1.5rem; display: flex; align-items: center; gap: 1.5rem; height: 48px; }
+.logo { font-family: var(--ff-display); font-size: 14px; font-weight: 700; color: var(--gold2); text-decoration: none; }
+.header-title { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,240,232,.5); }
+.header-back { font-family: var(--ff-mono); font-size: 10px; color: rgba(245,240,232,.5); text-decoration: none; transition: color .15s; }
+.header-back:hover { color: var(--gold2); }
+.header-controls { margin-left: auto; display: flex; align-items: center; gap: .75rem; }
+.ctrl-btn { font-family: var(--ff-mono); font-size: 10px; padding: 4px 10px; border: 1px solid rgba(245,240,232,.2); background: transparent; color: rgba(245,240,232,.6); cursor: pointer; border-radius: 3px; transition: all .15s; letter-spacing: .04em; }
+.ctrl-btn:hover, .ctrl-btn.active { background: rgba(245,240,232,.1); color: var(--gold2); border-color: var(--gold2); }
+.search-wrap { position: relative; }
+.search-input { font-family: var(--ff-mono); font-size: 10px; padding: 4px 8px 4px 24px; border: 1px solid rgba(245,240,232,.2); background: rgba(255,255,255,.07); color: var(--paper); border-radius: 3px; width: 140px; outline: none; }
+.search-input::placeholder { color: rgba(245,240,232,.3); }
+.search-icon { position: absolute; left: 7px; top: 50%; transform: translateY(-50%); color: rgba(245,240,232,.3); font-size: 11px; pointer-events: none; }
+
+/* MAIN LAYOUT */
+.app { display: flex; flex: 1; overflow: hidden; }
+
+/* SIDEBAR */
+.sidebar { width: var(--sidebar-w); flex-shrink: 0; background: #fff; border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+.sidebar-header { padding: .75rem 1rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.sidebar-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
+.sidebar-title { font-family: var(--ff-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.sidebar-cols { display: grid; grid-template-columns: 1fr auto auto auto; gap: 4px; font-family: var(--ff-mono); font-size: 8px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; padding: 0 2px; }
+.sidebar-list { flex: 1; overflow-y: auto; }
+.art-row { display: grid; grid-template-columns: 1fr auto auto auto; gap: 4px; align-items: center; padding: 5px 10px; cursor: pointer; border-left: 3px solid transparent; transition: background .1s; }
+.art-row:hover { background: var(--paper2); }
+.art-row.selected { background: var(--navy); border-left-color: var(--gold2); }
+.art-row.selected .art-num, .art-row.selected .art-val { color: var(--paper); }
+.art-row.selected .art-muted { color: rgba(245,240,232,.5); }
+.art-num { font-family: var(--ff-mono); font-size: 10px; font-weight: 500; color: var(--ink); white-space: nowrap; }
+.art-val { font-family: var(--ff-mono); font-size: 10px; text-align: right; }
+.art-muted { font-family: var(--ff-mono); font-size: 9px; color: var(--muted); text-align: right; }
+.art-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* MAIN AREA */
+.main-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+/* SISMÓGRAFO */
+.sismo-wrap { padding: 1rem 1.5rem .5rem; flex-shrink: 0; border-bottom: 1px solid var(--border); background: var(--navy); }
+.sismo-controls { display: flex; align-items: center; gap: .5rem; margin-bottom: .75rem; }
+.sismo-label { font-family: var(--ff-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,240,232,.4); margin-right: .5rem; }
+.scale-btn { font-family: var(--ff-mono); font-size: 9px; padding: 3px 8px; border: 1px solid rgba(245,240,232,.2); background: transparent; color: rgba(245,240,232,.5); cursor: pointer; border-radius: 3px; transition: all .12s; }
+.scale-btn.active { background: rgba(212,160,23,.2); color: var(--gold2); border-color: var(--gold2); }
+.sismo-canvas-wrap { position: relative; }
+#sismo-canvas { display: block; width: 100%; cursor: crosshair; }
+.sismo-tooltip { position: absolute; background: rgba(15,14,13,.9); color: var(--paper); font-family: var(--ff-mono); font-size: 10px; padding: 4px 8px; border-radius: 3px; pointer-events: none; display: none; white-space: nowrap; z-index: 10; }
+
+/* CONTENT AREA (below sismo) */
+.content-area { flex: 1; display: flex; overflow: hidden; }
+
+/* ARTICLE PANEL */
+.art-panel { width: var(--panel-w); flex-shrink: 0; border-right: 1px solid var(--border); overflow-y: auto; background: #fff; }
+.art-panel-empty { display: flex; align-items: center; justify-content: center; height: 100%; color: var(--muted); font-family: var(--ff-mono); font-size: 11px; text-align: center; padding: 2rem; line-height: 1.6; }
+.art-panel-content { padding: 1.25rem; }
+.art-panel-titulo { font-family: var(--ff-mono); font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .5rem; }
+.art-panel-num { font-family: var(--ff-display); font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: .5rem; }
+.art-panel-caput { font-size: 12px; line-height: 1.6; color: var(--ink); margin-bottom: 1rem; padding: .75rem; background: var(--paper2); border-radius: 4px; border-left: 3px solid var(--gold); }
+.dispositivo-bloco { margin-bottom: .75rem; }
+.dispositivo-label { font-family: var(--ff-mono); font-size: 9px; color: var(--muted); margin-bottom: .25rem; }
+.dispositivo-texto { font-size: 11px; color: var(--ink); line-height: 1.5; padding: .5rem .75rem; background: var(--paper); border-left: 2px solid var(--border2); border-radius: 0 3px 3px 0; }
+
+.decisoes-header { font-family: var(--ff-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: .75rem 1.25rem .5rem; border-top: 1px solid var(--border); background: var(--paper2); }
+.decisao-item { padding: .75rem 1.25rem; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .1s; }
+.decisao-item:hover { background: var(--paper2); }
+.decisao-item.expanded { background: var(--paper2); }
+.decisao-classe { display: inline-block; font-family: var(--ff-mono); font-size: 9px; font-weight: 500; padding: 2px 6px; border-radius: 3px; background: var(--navy); color: var(--gold2); margin-bottom: .3rem; }
+.decisao-classe.concentrado { background: #1a3a6e; }
+.decisao-classe.repercussao { background: #1a4a1a; }
+.decisao-classe.correlato { background: #3a2a1a; }
+.decisao-classe.sumula { background: #3a1a3a; }
+.decisao-nome { font-family: var(--ff-mono); font-size: 11px; font-weight: 500; color: var(--ink); margin-bottom: .2rem; }
+.decisao-meta { font-size: 10px; color: var(--muted); }
+.decisao-ementa { font-size: 10px; color: var(--ink); line-height: 1.5; margin-top: .5rem; padding: .5rem; background: var(--paper); border-radius: 3px; display: none; }
+.decisao-item.expanded .decisao-ementa { display: block; }
+.decisao-link { font-family: var(--ff-mono); font-size: 9px; color: var(--navy); text-decoration: none; margin-top: .3rem; display: inline-block; }
+.decisao-link:hover { color: var(--gold); }
+
+/* HEATMAP AREA */
+.heatmap-area { flex: 1; overflow: auto; padding: 1rem 1.5rem; }
+.heatmap-title { font-family: var(--ff-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .75rem; }
+#heatmap-wrap { overflow-x: auto; }
+
+/* BLOCO LEGEND */
+.bloco-legend { display: flex; flex-wrap: wrap; gap: .5rem; padding: .5rem 1.5rem; border-bottom: 1px solid var(--border); background: rgba(26,39,68,.05); flex-shrink: 0; }
+.bloco-item { display: flex; align-items: center; gap: 4px; font-family: var(--ff-mono); font-size: 9px; color: var(--muted); cursor: pointer; }
+.bloco-item:hover { color: var(--ink); }
+.bloco-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+/* LOADING */
+.loading-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 1rem; }
+.spinner { width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-family: var(--ff-mono); font-size: 11px; color: var(--muted); }
+
+/* BLOCO COLORS */
+.bloco-T1 { background: #8B0000; }
+.bloco-T2 { background: #1a3a5c; }
+.bloco-T3 { background: #2d5a27; }
+.bloco-T4 { background: #4a3728; }
+.bloco-T5 { background: #5a4a00; }
+.bloco-T6 { background: #3d1a5c; }
+.bloco-T7 { background: #1a4a4a; }
+.bloco-T8 { background: #5c3a00; }
+.bloco-T9 { background: #3a3a3a; }
+.bloco-ADCT { background: #1a1a2e; }
+
+.heatcell { display: inline-block; width: 10px; height: 10px; border-radius: 1px; cursor: pointer; transition: opacity .1s; }
+.heatcell:hover { opacity: .7; transform: scale(1.3); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">ICONS</a>
+    <span class="header-title">Sismógrafo Jurisprudencial · CF/88 · 1988–2026</span>
+    <a href="cartografia_stf.html" class="header-back">← Cartografia</a>
+    <div class="header-controls">
+      <button class="ctrl-btn active" id="btn-blocos" onclick="setView('blocos')">blocos</button>
+      <button class="ctrl-btn" id="btn-instab" onclick="setView('instabilidade')">instabilidade</button>
+      <button class="ctrl-btn" id="btn-volume" onclick="setView('volume')">volume</button>
+      <button class="ctrl-btn active" id="btn-log" onclick="setScale('log')">log</button>
+      <button class="ctrl-btn" id="btn-lin" onclick="setScale('linear')">linear</button>
+      <button class="ctrl-btn" onclick="toggleHeatmap()">⊞ Mapa de Calor</button>
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input class="search-input" id="search-input" placeholder="buscar artigo..." oninput="filterList(this.value)">
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="loading-screen" class="loading-screen" style="flex:1">
+  <div class="spinner"></div>
+  <div class="loading-text">carregando topografia constitucional...</div>
+</div>
+
+<div id="app" class="app" style="display:none">
+
+  <!-- SIDEBAR: lista de artigos -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-header-top">
+        <span class="sidebar-title">Artigos da CF/88</span>
+        <span id="art-count" style="font-family:var(--ff-mono);font-size:9px;color:var(--muted)"></span>
+      </div>
+      <div class="sidebar-cols">
+        <span>Artigo CF</span>
+        <span>Inst.</span>
+        <span>Vol.</span>
+        <span>Amp.</span>
+      </div>
+    </div>
+    <div class="sidebar-list" id="art-list"></div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main-area">
+
+    <!-- BLOCO LEGEND -->
+    <div class="bloco-legend" id="bloco-legend"></div>
+
+    <!-- SISMÓGRAFO -->
+    <div class="sismo-wrap">
+      <div class="sismo-controls">
+        <span class="sismo-label">Placas tectônicas da CF/88 · tensão decisória por artigo</span>
+      </div>
+      <div class="sismo-canvas-wrap">
+        <canvas id="sismo-canvas" height="140"></canvas>
+        <div class="sismo-tooltip" id="sismo-tooltip"></div>
+      </div>
+    </div>
+
+    <!-- CONTENT: painel + heatmap -->
+    <div class="content-area">
+
+      <!-- ARTICLE PANEL -->
+      <div class="art-panel" id="art-panel">
+        <div class="art-panel-empty" id="art-panel-empty">
+          ⟵ Selecione um artigo para analisar<br>a oscilação jurisprudencial
+        </div>
+        <div id="art-panel-content" style="display:none"></div>
+      </div>
+
+      <!-- HEATMAP -->
+      <div class="heatmap-area" id="heatmap-area">
+        <div class="heatmap-title">Mapa de Calor — Contencioso Constitucional · Volume de decisões por artigo e período de 5 anos</div>
+        <div id="heatmap-wrap"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPA = 'https://hetuhkhhppxjliiaerlu.supabase.co'
+const KEY  = 'sb_publishable_o-czLjy2cewbXs29vTyzHQ_unH3p1wK'
+const H    = { 'apikey': KEY, 'Authorization': `Bearer ${KEY}` }
+
+async function sel(table, qs='') {
+  const r = await fetch(`${SUPA}/rest/v1/${table}?${qs}&limit=10000`, { headers: { ...H, 'Prefer': 'count=exact' } })
+  const data = await r.json()
+  return Array.isArray(data) ? data : []
+}
+
+// ============================================================
+// TITULOS / CORES
+// ============================================================
+const TITULO_CORES = {
+  1: '#8B0000', 2: '#1a3a5c', 3: '#2d5a27', 4: '#4a3728',
+  5: '#5a4a00', 6: '#3d1a5c', 7: '#1a4a4a', 8: '#5c3a00',
+  9: '#3a3a3a', 0: '#1a1a2e' // ADCT
+}
+const TITULO_NOMES = {
+  1:'Princípios Fundamentais', 2:'Direitos e Garantias', 3:'Organização do Estado',
+  4:'Organização dos Poderes', 5:'Defesa do Estado', 6:'Tributação e Orçamento',
+  7:'Ordem Econômica', 8:'Ordem Social', 9:'Disposições Gerais', 0:'ADCT'
+}
+
+// ============================================================
+// STATE
+// ============================================================
+let STATE = {
+  artigos: [],        // [{id, numero, numero_texto, caput, tipo, titulo_id, titulo_num, cor}]
+  vinculos: {},       // artigo_id -> count
+  vinculosList: [],   // [{artigo_id, decisao_id, tipo_bloco}]
+  decisoes: {},       // id -> {classe, numero, classe_numero, relator, data_julgamento, orgao_julgador, ementa, integra_url}
+  artDecisoes: {},    // artigo_id -> [{decisao+vinculo}]
+  artAmplitude: {},   // artigo_id -> anos
+  artIDI: {},         // artigo_id -> score 0-100
+  incisos: {},        // artigo_id -> [{numero_romano, texto}]
+  paragrafos: {},     // artigo_id -> [{numero_texto, texto}]
+  scale: 'log',
+  view: 'blocos',
+  selected: null,
+  filter: '',
+  heatmapVisible: false,
+}
+
+// ============================================================
+// LOAD DATA
+// ============================================================
+async function loadData() {
+  const [artigos, titulos, vinculos, decisoes, incisos, paragrafos] = await Promise.all([
+    sel('cf_artigos', 'select=id,numero,numero_texto,caput,tipo,titulo_id&order=ordem'),
+    sel('cf_titulos', 'select=id,numero_int,denominacao,cor_hex'),
+    sel('cf_vinculos', 'select=id,artigo_id,decisao_id,tipo_bloco,texto_contexto'),
+    sel('stf_decisoes', 'select=id,classe,numero,classe_numero,relator,data_julgamento,orgao_julgador,ementa,integra_url'),
+    sel('cf_incisos', 'select=artigo_id,numero_romano,texto,ordem&order=ordem'),
+    sel('cf_paragrafos', 'select=artigo_id,numero_texto,texto,ordem&order=ordem'),
+  ])
+
+  // Build titulo map
+  const titMap = {}
+  titulos.forEach(t => titMap[t.id] = { num: t.numero_int, cor: t.cor_hex || TITULO_CORES[t.numero_int] || '#3a3a3a', nome: t.denominacao })
+
+  // Enrich artigos
+  STATE.artigos = artigos.map(a => {
+    const tit = titMap[a.titulo_id] || { num: 0, cor: TITULO_CORES[0], nome: 'ADCT' }
+    return { ...a, titulo_num: tit.num, cor: a.tipo === 'ADCT' ? TITULO_CORES[0] : (tit.cor || TITULO_CORES[tit.num] || '#3a3a3a') }
+  })
+
+  // Decisoes map
+  decisoes.forEach(d => STATE.decisoes[d.id] = d)
+
+  // Vinculos
+  STATE.vinculosList = vinculos
+  vinculos.forEach(v => {
+    STATE.vinculos[v.artigo_id] = (STATE.vinculos[v.artigo_id] || 0) + 1
+    if (!STATE.artDecisoes[v.artigo_id]) STATE.artDecisoes[v.artigo_id] = []
+    STATE.artDecisoes[v.artigo_id].push(v)
+  })
+
+  // Amplitude temporal
+  decisoes.forEach(d => {
+    if (!d.data_julgamento) return
+    const y = +d.data_julgamento.substring(0,4)
+    const decs = vinculos.filter(v => v.decisao_id === d.id)
+    decs.forEach(v => {
+      if (!STATE.artAmplitude[v.artigo_id]) STATE.artAmplitude[v.artigo_id] = { min: y, max: y }
+      STATE.artAmplitude[v.artigo_id].min = Math.min(STATE.artAmplitude[v.artigo_id].min, y)
+      STATE.artAmplitude[v.artigo_id].max = Math.max(STATE.artAmplitude[v.artigo_id].max, y)
+    })
+  })
+
+  // IDI (0-100): normalizado pelo máximo
+  const maxVinc = Math.max(...Object.values(STATE.vinculos), 1)
+  STATE.artigos.forEach(a => {
+    const v = STATE.vinculos[a.id] || 0
+    STATE.artIDI[a.id] = Math.round(v / maxVinc * 100)
+  })
+
+  // Incisos + Paragrafos
+  incisos.forEach(i => { if(!STATE.incisos[i.artigo_id]) STATE.incisos[i.artigo_id]=[]; STATE.incisos[i.artigo_id].push(i) })
+  paragrafos.forEach(p => { if(!STATE.paragrafos[p.artigo_id]) STATE.paragrafos[p.artigo_id]=[]; STATE.paragrafos[p.artigo_id].push(p) })
+}
+
+// ============================================================
+// RENDER SIDEBAR
+// ============================================================
+function renderSidebar(filter='') {
+  const list = document.getElementById('art-list')
+  const filt = filter.toLowerCase()
+  let arts = STATE.artigos
+  if (filt) arts = arts.filter(a => ('art. '+a.numero_texto).toLowerCase().includes(filt) || a.caput?.toLowerCase().includes(filt))
+
+  document.getElementById('art-count').textContent = arts.length + ' artigos'
+
+  list.innerHTML = arts.map(a => {
+    const v = STATE.vinculos[a.id] || 0
+    const amp = STATE.artAmplitude[a.id] ? STATE.artAmplitude[a.id].max - STATE.artAmplitude[a.id].min : 0
+    const idi = STATE.artIDI[a.id] || 0
+    const sel = STATE.selected?.id === a.id ? 'selected' : ''
+    return `<div class="art-row ${sel}" onclick="selectArt(${a.id})" data-id="${a.id}">
+      <span class="art-num">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:1px;background:${a.cor};margin-right:4px;vertical-align:middle"></span>
+        Art. ${a.numero_texto}${a.tipo==='ADCT'?' <span style="font-size:8px;opacity:.6">ADCT</span>':''}
+      </span>
+      <span class="art-val" style="color:${idi>50?'#b8860b':idi>20?'#3d679c':'var(--muted)'}">${idi}</span>
+      <span class="art-val">${v||'—'}</span>
+      <span class="art-muted">${amp?amp+'a':'—'}</span>
+    </div>`
+  }).join('')
+}
+
+// ============================================================
+// RENDER SISMÓGRAFO
+// ============================================================
+function renderSismo() {
+  const canvas = document.getElementById('sismo-canvas')
+  const ctx = canvas.getContext('2d')
+  const W = canvas.offsetWidth
+  const H = 140
+  canvas.width = W
+  canvas.height = H
+
+  const arts = STATE.artigos
+  const N = arts.length
+  if (!N) return
+
+  // Compute heights
+  const vals = arts.map(a => STATE.vinculos[a.id] || 0)
+  const maxVal = Math.max(...vals, 1)
+
+  function barH(v) {
+    if (!v) return 0
+    if (STATE.scale === 'log') return Math.log(v+1) / Math.log(maxVal+1) * (H-20)
+    return v / maxVal * (H-20)
+  }
+
+  function barColor(a, v) {
+    if (STATE.view === 'volume') {
+      const t = v/maxVal
+      if (t > .7) return '#0f2244'
+      if (t > .4) return '#1a3a6e'
+      if (t > .2) return '#3d679c'
+      if (t > .05) return '#7a96bc'
+      return '#b5c4d9'
+    }
+    if (STATE.view === 'instabilidade') {
+      const idi = STATE.artIDI[a.id] || 0
+      if (idi > 70) return '#8b0000'
+      if (idi > 40) return '#b8860b'
+      if (idi > 20) return '#d4a017'
+      if (idi > 5)  return '#7a96bc'
+      return '#e2d9c8'
+    }
+    return a.cor || '#3a3a3a'
+  }
+
+  ctx.clearRect(0, 0, W, H)
+
+  // Background
+  ctx.fillStyle = '#0a0f1e'
+  ctx.fillRect(0, 0, W, H)
+
+  // Baseline
+  const baseline = H - 10
+  ctx.strokeStyle = 'rgba(212,160,23,.3)'
+  ctx.lineWidth = 1
+  ctx.beginPath()
+  ctx.moveTo(0, baseline)
+  ctx.lineTo(W, baseline)
+  ctx.stroke()
+
+  // Bloco separators
+  let prevTit = null
+  arts.forEach((a, i) => {
+    if (a.titulo_num !== prevTit && prevTit !== null) {
+      const x = (i / N) * W
+      ctx.strokeStyle = 'rgba(212,160,23,.15)'
+      ctx.lineWidth = 1
+      ctx.setLineDash([3,3])
+      ctx.beginPath()
+      ctx.moveTo(x, 0)
+      ctx.lineTo(x, H)
+      ctx.stroke()
+      ctx.setLineDash([])
+    }
+    prevTit = a.titulo_num
+  })
+
+  // Bars
+  const barW = Math.max(1, W / N - 0.5)
+  arts.forEach((a, i) => {
+    const v = vals[i]
+    const bh = barH(v)
+    const x = (i / N) * W
+    const color = barColor(a, v)
+
+    if (bh > 0) {
+      ctx.fillStyle = color
+      ctx.fillRect(x, baseline - bh, barW, bh)
+    }
+
+    // Selected highlight
+    if (STATE.selected?.id === a.id) {
+      ctx.strokeStyle = '#d4a017'
+      ctx.lineWidth = 2
+      ctx.strokeRect(x-1, baseline-bh-2, barW+2, bh+4)
+    }
+  })
+
+  // Store bar positions for hit testing
+  window._sismoBars = arts.map((a,i) => ({
+    a, x: (i/N)*W, w: barW, h: barH(vals[i]), v: vals[i], baseline
+  }))
+}
+
+// ============================================================
+// SISMO INTERACTION
+// ============================================================
+document.getElementById('sismo-canvas').addEventListener('mousemove', e => {
+  const rect = e.target.getBoundingClientRect()
+  const mx = e.clientX - rect.left
+  const tip = document.getElementById('sismo-tooltip')
+
+  const hit = window._sismoBars?.find(b => mx >= b.x && mx <= b.x + b.w + 2)
+  if (hit && hit.v > 0) {
+    tip.style.display = 'block'
+    tip.style.left = (hit.x + hit.w + 4) + 'px'
+    tip.style.top = Math.max(0, hit.baseline - hit.h - 20) + 'px'
+    tip.textContent = `Art. ${hit.a.numero_texto} · ${hit.v} vínculos · IDI ${STATE.artIDI[hit.a.id]||0}`
+  } else {
+    tip.style.display = 'none'
+  }
+})
+
+document.getElementById('sismo-canvas').addEventListener('click', e => {
+  const rect = e.target.getBoundingClientRect()
+  const mx = e.clientX - rect.left
+  const hit = window._sismoBars?.find(b => mx >= b.x && mx <= b.x + b.w + 2)
+  if (hit) selectArt(hit.a.id)
+})
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (!STATE.selected) return
+  const idx = STATE.artigos.findIndex(a => a.id === STATE.selected.id)
+  if (e.key === 'ArrowDown' && idx < STATE.artigos.length-1) selectArt(STATE.artigos[idx+1].id)
+  if (e.key === 'ArrowUp' && idx > 0) selectArt(STATE.artigos[idx-1].id)
+})
+
+// ============================================================
+// SELECT ARTICLE
+// ============================================================
+function selectArt(id) {
+  const art = STATE.artigos.find(a => a.id === id)
+  if (!art) return
+  STATE.selected = art
+
+  // Update sidebar
+  document.querySelectorAll('.art-row').forEach(r => {
+    r.classList.toggle('selected', +r.dataset.id === id)
+  })
+
+  // Scroll sidebar to selected
+  const row = document.querySelector(`.art-row[data-id="${id}"]`)
+  if (row) row.scrollIntoView({ block: 'nearest' })
+
+  // Redraw sismo
+  renderSismo()
+
+  // Render article panel
+  renderArtPanel(art)
+}
+
+function renderArtPanel(art) {
+  document.getElementById('art-panel-empty').style.display = 'none'
+  const content = document.getElementById('art-panel-content')
+  content.style.display = 'block'
+
+  const titNome = TITULO_NOMES[art.titulo_num] || (art.tipo === 'ADCT' ? 'ADCT' : '')
+  const incisos = STATE.incisos[art.id] || []
+  const paras = STATE.paragrafos[art.id] || []
+  const decisoes = STATE.artDecisoes[art.id] || []
+  const amplitude = STATE.artAmplitude[art.id]
+
+  // Header
+  let html = `<div class="art-panel-content">
+    <div class="art-panel-titulo">${titNome}${art.tipo==='ADCT'?' · ADCT':''}</div>
+    <div class="art-panel-num">Art. ${art.numero_texto}</div>
+    <div style="display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap">
+      <span style="font-family:var(--ff-mono);font-size:9px;padding:2px 7px;border-radius:3px;background:${art.cor};color:#fff">${STATE.vinculos[art.id]||0} vínculos</span>
+      <span style="font-family:var(--ff-mono);font-size:9px;padding:2px 7px;border-radius:3px;background:var(--paper3);color:var(--muted)">IDI ${STATE.artIDI[art.id]||0}</span>
+      ${amplitude ? `<span style="font-family:var(--ff-mono);font-size:9px;padding:2px 7px;border-radius:3px;background:var(--paper3);color:var(--muted)">${amplitude.max-amplitude.min} anos</span>` : ''}
+    </div>
+    <div class="art-panel-caput">${art.caput || ''}</div>`
+
+  // Incisos
+  if (incisos.length) {
+    html += `<div class="dispositivo-bloco"><div class="dispositivo-label">${incisos.length} incisos</div>`
+    incisos.slice(0,5).forEach(inc => {
+      html += `<div class="dispositivo-texto" style="margin-bottom:3px">${inc.texto?.substring(0,120)||''}${(inc.texto?.length||0)>120?'...':''}</div>`
+    })
+    if (incisos.length > 5) html += `<div style="font-family:var(--ff-mono);font-size:9px;color:var(--muted);margin-top:3px">+ ${incisos.length-5} incisos</div>`
+    html += `</div>`
+  }
+
+  // Parágrafos
+  if (paras.length) {
+    html += `<div class="dispositivo-bloco"><div class="dispositivo-label">${paras.length} parágrafos</div>`
+    paras.slice(0,3).forEach(p => {
+      html += `<div class="dispositivo-texto" style="margin-bottom:3px">§ ${p.numero_texto} ${p.texto?.substring(0,100)||''}${(p.texto?.length||0)>100?'...':''}</div>`
+    })
+    if (paras.length > 3) html += `<div style="font-family:var(--ff-mono);font-size:9px;color:var(--muted);margin-top:3px">+ ${paras.length-3} parágrafos</div>`
+    html += `</div>`
+  }
+
+  html += `</div>`
+
+  // Decisões
+  if (decisoes.length) {
+    const BLOCO_ORDER = ['concentrado','repercussao_geral','correlato','sumula','sem_secao']
+    const BLOCO_LABEL = { concentrado:'Controle Concentrado', repercussao_geral:'Repercussão Geral', correlato:'Julgados Correlatos', sumula:'Súmulas', sem_secao:'Outros' }
+
+    html += `<div class="decisoes-header">${decisoes.length} decisões vinculadas</div>`
+
+    BLOCO_ORDER.forEach(bloco => {
+      const blocoVincs = decisoes.filter(v => v.tipo_bloco === bloco)
+      if (!blocoVincs.length) return
+      html += `<div style="padding:.5rem 1.25rem .25rem;font-family:var(--ff-mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--paper)">${BLOCO_LABEL[bloco]}</div>`
+      blocoVincs.forEach(v => {
+        const d = STATE.decisoes[v.decisao_id]
+        if (!d) return
+        const cls = bloco === 'concentrado' ? 'concentrado' : bloco === 'repercussao_geral' ? 'repercussao' : bloco === 'sumula' ? 'sumula' : 'correlato'
+        html += `<div class="decisao-item" onclick="toggleDecisao(this)">
+          <div><span class="decisao-classe ${cls}">${d.classe}</span></div>
+          <div class="decisao-nome">${d.classe_numero}</div>
+          <div class="decisao-meta">${d.relator||'—'} · ${d.data_julgamento?.substring(0,4)||'—'} · ${d.orgao_julgador||'—'}</div>
+          ${d.ementa ? `<div class="decisao-ementa">${d.ementa.substring(0,400)}${d.ementa.length>400?'...':''}</div>` : ''}
+          ${d.integra_url ? `<a class="decisao-link" href="${d.integra_url}" target="_blank" onclick="event.stopPropagation()">Inteiro teor →</a>` : ''}
+        </div>`
+      })
+    })
+  }
+
+  content.innerHTML = html
+}
+
+function toggleDecisao(el) {
+  el.classList.toggle('expanded')
+}
+
+// ============================================================
+// BLOCO LEGEND
+// ============================================================
+function renderBlocoLegend() {
+  const leg = document.getElementById('bloco-legend')
+  const tits = [...new Set(STATE.artigos.map(a => a.titulo_num))].sort((a,b)=>a-b)
+  leg.innerHTML = tits.map(num => {
+    const cor = num === 0 ? TITULO_CORES[0] : (TITULO_CORES[num] || '#3a3a3a')
+    const nome = TITULO_NOMES[num] || 'ADCT'
+    const count = STATE.artigos.filter(a => a.titulo_num === num).length
+    return `<div class="bloco-item" title="${nome}">
+      <div class="bloco-dot" style="background:${cor}"></div>
+      <span>${num === 0 ? 'ADCT' : 'Tít.'+num}</span>
+      <span style="opacity:.5">(${count})</span>
+    </div>`
+  }).join('')
+}
+
+// ============================================================
+// HEATMAP
+// ============================================================
+function renderHeatmap() {
+  const wrap = document.getElementById('heatmap-wrap')
+  const arts = STATE.artigos.filter(a => STATE.vinculos[a.id])
+
+  // Get all decisions with dates
+  const decYears = {}
+  STATE.vinculosList.forEach(v => {
+    const d = STATE.decisoes[v.decisao_id]
+    if (!d?.data_julgamento) return
+    const y = +d.data_julgamento.substring(0,4)
+    const p = Math.floor(y/5)*5
+    const k = `${v.artigo_id}-${p}`
+    decYears[k] = (decYears[k]||0)+1
+  })
+
+  const periodos = [1988,1993,1998,2003,2008,2013,2018,2023]
+  const maxV = Math.max(...Object.values(decYears), 1)
+
+  function heatCol(v) {
+    if (!v) return '#f5f0e8'
+    const t = v/maxV
+    if (t<.1) return '#e8ecf4'
+    if (t<.25) return '#b5c4d9'
+    if (t<.5) return '#7a96bc'
+    if (t<.75) return '#3d679c'
+    return '#1a3a6e'
+  }
+
+  let html = `<table style="border-collapse:collapse;font-family:var(--ff-mono);font-size:9px">
+    <tr><th style="width:80px;text-align:right;padding-right:6px;color:var(--muted)"></th>
+    ${periodos.map(p=>`<th style="width:14px;text-align:center;color:var(--muted);padding:0 1px">${p}</th>`).join('')}
+    </tr>`
+
+  arts.forEach(a => {
+    const row = periodos.map(p => {
+      const v = decYears[`${a.id}-${p}`]||0
+      return `<td style="padding:1px"><div class="heatcell" style="background:${heatCol(v)};width:14px;height:10px" title="Art.${a.numero_texto} · ${p}: ${v}" onclick="selectArt(${a.id})"></div></td>`
+    }).join('')
+    html += `<tr>
+      <td style="text-align:right;padding-right:6px;color:${a.cor};font-weight:500;white-space:nowrap;cursor:pointer" onclick="selectArt(${a.id})">Art.${a.numero_texto}</td>
+      ${row}
+    </tr>`
+  })
+
+  html += '</table>'
+  wrap.innerHTML = html
+}
+
+// ============================================================
+// CONTROLS
+// ============================================================
+function setScale(s) {
+  STATE.scale = s
+  document.getElementById('btn-log').classList.toggle('active', s==='log')
+  document.getElementById('btn-lin').classList.toggle('active', s==='linear')
+  renderSismo()
+}
+
+function setView(v) {
+  STATE.view = v
+  document.getElementById('btn-blocos').classList.toggle('active', v==='blocos')
+  document.getElementById('btn-instab').classList.toggle('active', v==='instabilidade')
+  document.getElementById('btn-volume').classList.toggle('active', v==='volume')
+  renderSismo()
+}
+
+function toggleHeatmap() {
+  STATE.heatmapVisible = !STATE.heatmapVisible
+  const ha = document.getElementById('heatmap-area')
+  const ap = document.getElementById('art-panel')
+  if (STATE.heatmapVisible) {
+    ha.style.display = 'block'
+    ap.style.display = 'none'
+    if (!window._heatmapRendered) { renderHeatmap(); window._heatmapRendered = true; }
+  } else {
+    ha.style.display = 'none'
+    ap.style.display = 'block'
+  }
+}
+
+function filterList(val) {
+  STATE.filter = val
+  renderSidebar(val)
+}
+
+// ============================================================
+// RESIZE
+// ============================================================
+window.addEventListener('resize', () => { renderSismo() })
+
+// ============================================================
+// INIT
+// ============================================================
+async function init() {
+  await loadData()
+
+  document.getElementById('loading-screen').style.display = 'none'
+  document.getElementById('app').style.display = 'flex'
+
+  renderBlocoLegend()
+  renderSidebar()
+  renderSismo()
+
+  // Hide heatmap by default
+  document.getElementById('heatmap-area').style.display = 'none'
+}
+
+init()
+</script>
+</body>
+</html>

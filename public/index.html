@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICONS · Cartografia do Contencioso Constitucional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f0e0d;
+  --paper: #f5f0e8;
+  --paper2: #ede7d9;
+  --paper3: #e2d9c8;
+  --gold: #b8860b;
+  --gold2: #d4a017;
+  --rust: #8b3a1a;
+  --navy: #1a2744;
+  --navy2: #243058;
+  --teal: #0d5c5c;
+  --muted: #6b6355;
+  --border: rgba(15,14,13,0.12);
+  --border2: rgba(15,14,13,0.22);
+  --ff-display: 'Playfair Display', serif;
+  --ff-mono: 'DM Mono', monospace;
+  --ff-body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--ff-body); background: var(--paper); color: var(--ink); font-size: 14px; line-height: 1.6; }
+
+/* NAV */
+nav {
+  background: var(--navy);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 20px rgba(0,0,0,.3);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 2rem;
+  display: flex; align-items: center; gap: 2rem;
+  height: 56px;
+}
+.nav-logo {
+  font-family: var(--ff-display);
+  font-size: 16px; font-weight: 700;
+  color: var(--gold2);
+  text-decoration: none;
+  display: flex; flex-direction: column; line-height: 1.1;
+}
+.nav-logo span { font-size: 9px; font-family: var(--ff-mono); color: rgba(245,240,232,.4); font-weight: 400; letter-spacing: .08em; text-transform: uppercase; }
+.nav-links { display: flex; gap: 1.5rem; margin-left: 2rem; }
+.nav-links a { color: rgba(245,240,232,.65); text-decoration: none; font-size: 13px; transition: color .15s; }
+.nav-links a:hover { color: var(--paper); }
+.nav-cta {
+  margin-left: auto;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 12px; font-weight: 600;
+  text-decoration: none;
+  transition: background .15s;
+}
+.nav-cta:hover { background: var(--gold2); }
+
+/* HERO */
+.hero {
+  background: var(--navy);
+  color: var(--paper);
+  padding: 5rem 2rem 4rem;
+  border-bottom: 1px solid rgba(184,134,11,.25);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 0%, rgba(184,134,11,.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: var(--ff-mono);
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold2); margin-bottom: 1.5rem;
+}
+.hero-title {
+  font-family: var(--ff-display);
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 900; line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+.hero-title em { color: var(--gold2); font-style: italic; }
+.hero-sub {
+  font-size: 15px; color: rgba(245,240,232,.7);
+  max-width: 600px; margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+.hero-stats {
+  display: flex; justify-content: center; gap: 3rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+.hero-stat .n {
+  font-family: var(--ff-display);
+  font-size: 42px; font-weight: 900;
+  color: var(--gold2); line-height: 1;
+  display: block;
+}
+.hero-stat .l {
+  font-family: var(--ff-mono);
+  font-size: 9px; letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,.4);
+  margin-top: 4px;
+  display: block;
+}
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-weight: 600; font-size: 13px;
+  text-decoration: none;
+  transition: background .15s;
+}
+.btn-primary:hover { background: var(--gold2); }
+.btn-secondary {
+  background: transparent;
+  color: var(--paper);
+  padding: 12px 28px;
+  border-radius: 4px;
+  border: 1px solid rgba(245,240,232,.3);
+  font-size: 13px;
+  text-decoration: none;
+  transition: border-color .15s;
+}
+.btn-secondary:hover { border-color: rgba(245,240,232,.6); }
+
+/* FERRAMENTAS */
+.section { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; }
+.section-label {
+  font-family: var(--ff-mono);
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700; line-height: 1.2;
+  margin-bottom: .5rem;
+}
+.section-sub { color: var(--muted); font-size: 14px; margin-bottom: 3rem; }
+
+.ferramentas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 768px) { .ferramentas-grid { grid-template-columns: 1fr; } }
+
+.ferramenta-card {
+  border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform .2s, box-shadow .2s;
+  text-decoration: none; color: inherit;
+  display: block;
+}
+.ferramenta-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(15,14,13,.12); }
+
+.ferramenta-header {
+  background: var(--navy);
+  padding: 2rem;
+  color: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.ferramenta-header.sismografo { background: #2d1a0e; }
+.ferramenta-header::after {
+  content: '';
+  position: absolute; bottom: -20px; right: -20px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--gold); opacity: .12;
+}
+.ferramenta-num {
+  font-family: var(--ff-mono);
+  font-size: 9px; letter-spacing: .15em;
+  color: rgba(245,240,232,.4);
+  margin-bottom: .75rem;
+}
+.ferramenta-nome {
+  font-family: var(--ff-display);
+  font-size: 22px; font-weight: 700;
+  line-height: 1.2; margin-bottom: .25rem;
+}
+.ferramenta-nome em { color: var(--gold2); font-style: italic; }
+.ferramenta-tag {
+  font-family: var(--ff-mono);
+  font-size: 9px; letter-spacing: .1em;
+  color: rgba(245,240,232,.4);
+}
+.ferramenta-body { padding: 1.75rem 2rem; background: white; }
+.ferramenta-desc { font-size: 13px; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.6; }
+.ferramenta-lista { list-style: none; }
+.ferramenta-lista li {
+  font-size: 12px; color: var(--ink);
+  padding: 4px 0;
+  display: flex; align-items: center; gap: 8px;
+}
+.ferramenta-lista li::before { content: '→'; color: var(--gold); font-size: 10px; }
+.ferramenta-footer {
+  padding: 1rem 2rem;
+  background: var(--paper2);
+  border-top: 1px solid var(--border);
+}
+.ferramenta-link {
+  font-family: var(--ff-mono);
+  font-size: 11px; color: var(--navy);
+  text-decoration: none; font-weight: 500;
+  letter-spacing: .02em;
+}
+.ferramenta-link:hover { color: var(--gold); }
+
+/* METODOLOGIA */
+.metodologia { background: var(--navy); color: var(--paper); padding: 5rem 2rem; }
+.metodologia-inner { max-width: 1200px; margin: 0 auto; }
+.metodologia .section-label { color: rgba(245,240,232,.4); }
+.metodologia .section-title { color: var(--paper); margin-bottom: 3rem; }
+
+.passos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 4rem; }
+@media (max-width: 768px) { .passos { grid-template-columns: 1fr 1fr; } }
+
+.passo-num {
+  font-family: var(--ff-display);
+  font-size: 48px; font-weight: 900;
+  color: rgba(184,134,11,.25); line-height: 1;
+  margin-bottom: .5rem;
+}
+.passo-titulo { font-weight: 600; font-size: 14px; margin-bottom: .5rem; }
+.passo-desc { font-size: 12px; color: rgba(245,240,232,.55); line-height: 1.6; }
+
+.eixos-titulo {
+  font-family: var(--ff-mono);
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(245,240,232,.4); margin-bottom: 1.5rem;
+}
+.eixos-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+@media (max-width: 768px) { .eixos-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.eixo {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 6px; padding: 1rem;
+}
+.eixo-num {
+  font-family: var(--ff-mono);
+  font-size: 18px; color: var(--gold2);
+  margin-bottom: .25rem;
+}
+.eixo-nome { font-weight: 600; font-size: 11px; margin-bottom: .2rem; }
+.eixo-desc { font-size: 10px; color: rgba(245,240,232,.45); line-height: 1.4; }
+
+/* SOBRE */
+.sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+@media (max-width: 768px) { .sobre-grid { grid-template-columns: 1fr; } }
+
+.sobre-text {
+  font-family: var(--ff-display);
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 400; line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+.sobre-text em { color: var(--gold); font-style: italic; }
+.sobre-p { color: var(--muted); font-size: 13px; line-height: 1.7; margin-bottom: 1rem; }
+.sobre-quote {
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: var(--paper2);
+  border-radius: 0 6px 6px 0;
+}
+.sobre-quote p { font-family: var(--ff-display); font-size: 14px; font-style: italic; color: var(--navy); margin-bottom: .5rem; }
+.sobre-quote cite { font-family: var(--ff-mono); font-size: 10px; color: var(--muted); }
+
+.sobre-ficha { display: flex; flex-direction: column; gap: .75rem; }
+.ficha-row {
+  display: flex; gap: 1rem;
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.ficha-label { font-family: var(--ff-mono); color: var(--muted); min-width: 100px; letter-spacing: .05em; }
+.ficha-val { color: var(--ink); font-weight: 500; }
+
+/* FOOTER */
+footer {
+  background: var(--navy);
+  color: rgba(245,240,232,.5);
+  text-align: center;
+  padding: 2rem;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  line-height: 2;
+}
+footer a { color: rgba(245,240,232,.5); text-decoration: none; }
+footer a:hover { color: var(--gold2); }
+
+/* LOADING */
+.stat-loading {
+  display: inline-block;
+  width: 60px; height: 12px;
+  background: rgba(184,134,11,.2);
+  border-radius: 3px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      ICONS
+      <span>Instituto Constituição Aberta</span>
+    </a>
+    <div class="nav-links">
+      <a href="#ferramentas">Ferramentas</a>
+      <a href="#metodologia">Metodologia</a>
+      <a href="#sobre">Sobre</a>
+    </div>
+    <a href="cartografia_stf.html" class="nav-cta">Acessar →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">PROJUS · Projeto Justiça Aberta · desde 2016</div>
+  <h1 class="hero-title">Cartografia do <em>Contencioso</em><br>Constitucional</h1>
+  <p class="hero-sub">Mapeamento jurisprudencial das decisões do Supremo Tribunal Federal desde a promulgação da Constituição Federal de 1988. Padrões de decidibilidade, oscilação jurisprudencial e linhas decisórias por artigo — com dados reais extraídos dos acórdãos.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="n" id="stat-decisoes"><span class="stat-loading"></span></span>
+      <span class="l">decisões mapeadas</span>
+    </div>
+    <div class="hero-stat">
+      <span class="n" id="stat-artigos"><span class="stat-loading"></span></span>
+      <span class="l">artigos da CF/88</span>
+    </div>
+    <div class="hero-stat">
+      <span class="n" id="stat-anos">37 anos</span>
+      <span class="l">amplitude temporal</span>
+    </div>
+    <div class="hero-stat">
+      <span class="n" id="stat-relatores"><span class="stat-loading"></span></span>
+      <span class="l">relatores mapeados</span>
+    </div>
+  </div>
+  <div class="hero-btns">
+    <a href="cartografia_stf.html" class="btn-primary">Cartografia do contencioso constitucional →</a>
+    <a href="sismografo.html" class="btn-secondary">Sismógrafo jurisprudencial →</a>
+  </div>
+</section>
+
+<!-- FERRAMENTAS -->
+<section class="section" id="ferramentas">
+  <div class="section-label">Ferramentas analíticas</div>
+  <h2 class="section-title">Duas entradas<br>para o contencioso constitucional</h2>
+  <p class="section-sub">Cada ferramenta responde a uma pergunta diferente sobre o comportamento decisório do STF ao longo do tempo.</p>
+
+  <div class="ferramentas-grid">
+    <a href="cartografia_stf.html" class="ferramenta-card">
+      <div class="ferramenta-header">
+        <div class="ferramenta-num">FERRAMENTA 01</div>
+        <div class="ferramenta-nome">Cartografia do <em>Contencioso Constitucional</em></div>
+        <div class="ferramenta-tag">12 eixos analíticos · visão macro</div>
+      </div>
+      <div class="ferramenta-body">
+        <p class="ferramenta-desc">Visão panorâmica do contencioso constitucional. Distribui as decisões por eixos temáticos, temporais, institucionais e processuais para revelar a estrutura do sistema.</p>
+        <ul class="ferramenta-lista">
+          <li>Evolução temporal 1988–2026</li>
+          <li>Distribuição por classe processual</li>
+          <li>Ranking de relatores por volume</li>
+          <li>Mapa de calor por período</li>
+          <li>Blocos temáticos e clusters</li>
+          <li>Índice de decidibilidade</li>
+        </ul>
+      </div>
+      <div class="ferramenta-footer">
+        <span class="ferramenta-link">Acessar cartografia →</span>
+      </div>
+    </a>
+
+    <a href="sismografo.html" class="ferramenta-card">
+      <div class="ferramenta-header sismografo">
+        <div class="ferramenta-num">FERRAMENTA 02</div>
+        <div class="ferramenta-nome">Sismógrafo <em>Jurisprudencial</em></div>
+        <div class="ferramenta-tag">Por artigo · instabilidade decisória</div>
+      </div>
+      <div class="ferramenta-body">
+        <p class="ferramenta-desc">Análise longitudinal de cada artigo constitucional. Detecta reversões, fragmentação e oscilação — quando o STF muda, volta atrás ou perde a linha sobre o mesmo dispositivo.</p>
+        <ul class="ferramenta-lista">
+          <li>Índice de instabilidade por artigo</li>
+          <li>Reversões A→B→A detectadas</li>
+          <li>Períodos de fragmentação</li>
+          <li>Conteúdo doutrinário por período</li>
+          <li>Painel "antes e depois" das viradas</li>
+          <li>40 artigos mais litigados</li>
+        </ul>
+      </div>
+      <div class="ferramenta-footer">
+        <span class="ferramenta-link">Analisar oscilação →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- METODOLOGIA -->
+<section class="metodologia" id="metodologia">
+  <div class="metodologia-inner">
+    <div class="section-label">Metodologia</div>
+    <h2 class="section-title">Como os dados foram produzidos</h2>
+
+    <div class="passos">
+      <div class="passo">
+        <div class="passo-num">1</div>
+        <div class="passo-titulo">Extração</div>
+        <div class="passo-desc">Leitura automatizada da Constituição Federal Comentada pelas decisões do STF. 33.823 parágrafos processados com reconhecimento de padrões de citação.</div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">2</div>
+        <div class="passo-titulo">Estruturação</div>
+        <div class="passo-desc">Cada decisão foi parseada: classe processual, número, relator, data, órgão julgador e artigo de ancoragem constitucional. 8.677 fragmentos com contexto doutrinário.</div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">3</div>
+        <div class="passo-titulo">Análise de instabilidade</div>
+        <div class="passo-desc">Índice composto (0–100) por artigo: quebras de relator, reversões A→B→A, fragmentação decisória, oscilação de classe e volatilidade de volume.</div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">4</div>
+        <div class="passo-titulo">Visualização</div>
+        <div class="passo-desc">Design da informação jurídica para tornar o contencioso constitucional acessível — ao cidadão, ao pesquisador e ao operador do direito.</div>
+      </div>
+    </div>
+
+    <div class="eixos-titulo">12 eixos analíticos</div>
+    <div class="eixos-grid">
+      <div class="eixo"><div class="eixo-num">①</div><div class="eixo-nome">TEMPORAL</div><div class="eixo-desc">Evolução histórica · Decisões por ano com fases do contencioso</div></div>
+      <div class="eixo"><div class="eixo-num">②</div><div class="eixo-nome">CLASSES</div><div class="eixo-desc">Distribuição processual · ADI, RE, HC, ADPF e demais classes</div></div>
+      <div class="eixo"><div class="eixo-num">③</div><div class="eixo-nome">RELATORES</div><div class="eixo-desc">Linhas por ministro · Volume e especialização temática</div></div>
+      <div class="eixo"><div class="eixo-num">④</div><div class="eixo-nome">ARTIGOS</div><div class="eixo-desc">Litigiosidade · Artigos mais demandados da CF/88</div></div>
+      <div class="eixo"><div class="eixo-num">⑤</div><div class="eixo-nome">CALOR</div><div class="eixo-desc">Mapa de intensidade · Relator × período de 5 anos</div></div>
+      <div class="eixo"><div class="eixo-num">⑥</div><div class="eixo-nome">MUDANÇAS</div><div class="eixo-desc">Viradas de entendimento · Amplitude temporal e ciclos de revisão</div></div>
+      <div class="eixo"><div class="eixo-num">⑦</div><div class="eixo-nome">ÓRGÃO</div><div class="eixo-desc">Plenário vs Turmas · Distribuição e competências</div></div>
+      <div class="eixo"><div class="eixo-num">⑧</div><div class="eixo-nome">TEMAS</div><div class="eixo-desc">Blocos constitucionais · Clusters por título da CF/88</div></div>
+      <div class="eixo"><div class="eixo-num">⑨</div><div class="eixo-nome">DECIDIB.</div><div class="eixo-desc">Decidibilidade · Índice de estabilidade por classe</div></div>
+      <div class="eixo"><div class="eixo-num">⑩</div><div class="eixo-nome">TEMPO</div><div class="eixo-desc">Intervalo decisório · Contencioso crônico vs pontual</div></div>
+      <div class="eixo"><div class="eixo-num">⑪</div><div class="eixo-nome">REDE</div><div class="eixo-desc">Co-citação · Clusters de artigos interligados</div></div>
+      <div class="eixo"><div class="eixo-num">⑫</div><div class="eixo-nome">PERFIL</div><div class="eixo-desc">Perfil decisório · Radar de especialização por ministro</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="section" id="sobre">
+  <div class="section-label">Sobre o PROJUS</div>
+  <div class="sobre-grid">
+    <div>
+      <h2 class="sobre-text">Instituto <em>Constituição Aberta</em></h2>
+      <p class="sobre-p">O ICONS é uma organização da sociedade civil de interesse público, sem fins lucrativos, dedicada à promoção da transparência do Poder Judiciário e ao fortalecimento das relações entre o STF e a sociedade civil.</p>
+      <p class="sobre-p">O PROJUS — Projeto Justiça Aberta — nasceu de uma proposta de pesquisa interdisciplinar de 2016, coordenada pela Damares Medina, com o objetivo de extrair, tratar e traduzir as decisões do STF em linguagem acessível ao cidadão.</p>
+      <div class="sobre-quote">
+        <p>Assim como a Constituição é um projeto aberto, o STF está em constante realização constitucional.</p>
+        <cite>— Min. Aliomar Baleeiro, 1968</cite>
+      </div>
+    </div>
+    <div class="sobre-ficha">
+      <div class="ficha-row"><span class="ficha-label">Projeto</span><span class="ficha-val">Contencioso Constitucional</span></div>
+      <div class="ficha-row"><span class="ficha-label">Coord.</span><span class="ficha-val">Damares Medina</span></div>
+      <div class="ficha-row"><span class="ficha-label">Instituição</span><span class="ficha-val">Instituto Constituição Aberta – ICONS</span></div>
+      <div class="ficha-row"><span class="ficha-label">Projeto</span><span class="ficha-val">PROJUS – Projeto Justiça Aberta</span></div>
+      <div class="ficha-row"><span class="ficha-label">Fonte</span><span class="ficha-val">Constituição Federal Comentada pelas Decisões do STF · 1988–2026</span></div>
+      <div class="ficha-row"><span class="ficha-label">Lattes</span><span class="ficha-val"><a href="http://lattes.cnpq.br/1721292294070477" target="_blank" style="color:var(--navy)">lattes.cnpq.br/1721292294070477</a></span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>ICONS · Instituto Constituição Aberta</div>
+  <div>PROJUS · Projeto Justiça Aberta · Coord. Damares Medina</div>
+  <div id="footer-stats" style="margin-top:.5rem; opacity:.6"></div>
+</footer>
+
+<script>
+const SUPABASE_URL = 'https://hetuhkhhppxjliiaerlu.supabase.co'
+const SUPABASE_KEY = 'sb_publishable_o-czLjy2cewbXs29vTyzHQ_unH3p1wK'
+
+async function query(sql) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/exec_sql`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`
+    },
+    body: JSON.stringify({ query: sql })
+  })
+  if (!res.ok) return null
+  return res.json()
+}
+
+async function get(table, params = '') {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${params}`, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Prefer': 'count=exact'
+    }
+  })
+  const count = res.headers.get('content-range')?.split('/')[1]
+  const data = await res.json()
+  return { data, count: count ? parseInt(count) : data.length }
+}
+
+function fmt(n) {
+  if (n >= 1000) return n.toLocaleString('pt-BR')
+  return n.toString()
+}
+
+async function loadStats() {
+  try {
+    // Total de vínculos (citações)
+    const vinculos = await get('cf_vinculos', 'select=id&limit=1')
+    document.getElementById('stat-decisoes').textContent = fmt(vinculos.count || 0)
+
+    // Total de artigos com vínculos
+    const { data: artsData } = await get('cf_vinculos', 'select=artigo_id&limit=1000')
+    const artsUnicos = new Set(artsData.map(v => v.artigo_id)).size
+    document.getElementById('stat-artigos').textContent = artsUnicos + (artsUnicos > 350 ? '+' : '')
+
+    // Total de relatores únicos
+    const { data: relData } = await get('stf_decisoes', 'select=relator&relator=not.is.null&limit=1000')
+    const relUnicos = new Set(relData.map(d => d.relator).filter(Boolean)).size
+    document.getElementById('stat-relatores').textContent = relUnicos + '+'
+
+    // Footer
+    document.getElementById('footer-stats').textContent =
+      `${fmt(vinculos.count)} citações · ${artsUnicos} artigos da CF/88 · 1988–2026`
+
+  } catch(e) {
+    console.error('Erro ao carregar stats:', e)
+    document.getElementById('stat-decisoes').textContent = '9.297'
+    document.getElementById('stat-artigos').textContent = '354'
+    document.getElementById('stat-relatores').textContent = '80+'
+  }
+}
+
+loadStats()
+</script>
+</body>
+</html>
