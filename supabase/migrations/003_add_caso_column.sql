@@ -1,0 +1,1 @@
+ALTER TABLE stf_decisoes ADD COLUMN IF NOT EXISTS caso TEXT;

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsx:*)",
+      "WebFetch(domain:projus.github.io)",
+      "Bash(node:*)",
+      "Bash(npm install:*)",
+      "Bash(ls:*)",
+      "Bash(npx next:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/cartografia)",
+      "Bash(cp C:/Users/medin/Downloads/index.html C:/projetos/icons/public/index.html)",
+      "Bash(cp C:/Users/medin/Downloads/cartografia_stf.html C:/projetos/icons/public/cartografia_stf.html)",
+      "Bash(cp C:/Users/medin/Downloads/sismografo.html C:/projetos/icons/public/sismografo.html)"
+    ]
+  }
+}
